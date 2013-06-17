@@ -5,7 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
@@ -26,16 +25,17 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Main 
 {
+	
 	public static final String MODID = "lokoisemod";
 	public static final String MODNAME = "Lokoise Mod";
 	public static final String MODVERSION = "v2";
 	
-	@SidedProxy(clientSide = "Lokoise.client.ClientProxy", serverSide = "Lokoise.common.CommonProxy")
-	public CommonProxy proxy;
+	@SidedProxy(clientSide = "LokoiseMod.client.ClientProxy", serverSide = "LokoiseMod.common.CommonProxy", modId = MODID)
+
+	public static CommonProxy proxy;
 	
 	@Instance(MODID)
 	public static Main instance;
-	
 	
 	public static Item CD_BugDeChunks,
 				  	   CD_JAimeLeCreep,
@@ -92,21 +92,21 @@ public class Main
 	@Init
 	public void init(FMLInitializationEvent event)
 	{
-		CD_BugDeChunks = (new ItemRecord(CD_BugDeChunksID, "Bug De Chunk - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JAimeLeCreep = (new ItemRecord(CD_JAimeLeCreepID, "J'Aime Le Creep - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JeMeGive = (new ItemRecord(CD_JeMeGiveID, "Je Me Give - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JGeekUnMax = (new ItemRecord(CD_JGeekUnMaxID, "J'Geek Un Max - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JSuisSeanKevin = (new ItemRecord(CD_JSuisSeanKevinID, "J'Suis Sean Kevin - By Lokoise")).setUnlocalizedName("record");
-	  	CD_TousLesZombies = (new ItemRecord(CD_TousLesZombiesID, "Tous Les Zombies - By Lokoise")).setUnlocalizedName("record");
-	  	CD_Acta = (new ItemRecord(CD_ActaID, "Acta - By Lokoise")).setUnlocalizedName("record");
-	  	CD_LeJournalDUnNaufragay = (new ItemRecord(CD_LeJournalDUnNaufragayID, "Le Journal D'Un Naufragay - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JFaitDesPellesEnDiams = (new ItemRecord(CD_JFaitDesPellesEnDiamsID, "J'fait des pelles en diam's - By Lokoise")).setUnlocalizedName("record");
+		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "", "Bug De Chunk - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "", "J'Aime Le Creep - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "", "Je Me Give - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "", "J'Geek Un Max - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "", "J'Suis Sean Kevin - By Lokoise")).setUnlocalizedName("record");
+	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "", "Tous Les Zombies - By Lokoise")).setUnlocalizedName("record");
+	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "", "Acta - By Lokoise")).setUnlocalizedName("record");
+	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "", "Le Journal D'Un Naufragay - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "", "J'fait des pelles en diam's - By Lokoise")).setUnlocalizedName("record");
 	  	
 	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
 		EntityRegistry.registerModEntity(EntityLokoise.class, "Lokoise", 500, this, 20, 1, true);
 		EntityRegistry.addSpawn(EntityLokoise.class, 1, 4, 4, EnumCreatureType.creature);
 	  	
-	  	spawnLokoise =(new BlockSpawnLokoise(spawnLokoiseID, 50, Material.rock)).setHardness(0.5F).setUnlocalizedName("spawnLokoise").setCreativeTab(CreativeTabs.tabMisc);
+	  	spawnLokoise =(new BlockSpawnLokoise(spawnLokoiseID, 50, Material.rock)).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("oreDiamond");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
 		proxy.registerRenderThings();
 	}
