@@ -7,6 +7,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -16,13 +17,14 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 @Mod(modid = Main.MODID, name = Main.MODNAME, version = Main.MODVERSION)
-
+@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class Main 
 {
 	
@@ -36,6 +38,8 @@ public class Main
 	
 	@Instance(MODID)
 	public static Main instance;
+	
+	public static int getFreeEggID;
 	
 	public static Item CD_BugDeChunks,
 				  	   CD_JAimeLeCreep,
@@ -60,13 +64,17 @@ public class Main
 	   		   CD_JFaitDesPellesEnDiamsID,
 	   		   spawnLokoiseID;
 
-	
+	public Main()
+	{
+		getFreeEggID = EntityRegistry.findGlobalUniqueEntityId();
+	}
 	
 	/** Pre initialisation du mod **/
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		MinecraftForge.EVENT_BUS.register(new LokoiseMod_SoundEvent());
 		try 
 		{
 			CD_BugDeChunksID = config.getItem("CD Bug de chunk ID", 5000).getInt();
@@ -94,22 +102,23 @@ public class Main
 	public void init(FMLInitializationEvent event)
 	{
 		
-		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "1", "Bug De Chunk - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "2", "J'Aime Le Creep - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "3", "Je Me Give - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "4", "J'Geek Un Max - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "5", "J'Suis Sean Kevin - By Lokoise")).setUnlocalizedName("record");
-	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "6", "Tous Les Zombies - By Lokoise")).setUnlocalizedName("record");
-	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "7", "Acta - By Lokoise")).setUnlocalizedName("record");
-	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "8", "Le Journal D'Un Naufragay - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "9", "J'fait des pelles en diam's - By Lokoise")).setUnlocalizedName("record");
+	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", getFreeEggID, 24, 30);
+		EntityRegistry.registerModEntity(EntityLokoise.class, "Lokoise", 250, this, 40, 1, true);
+		EntityRegistry.addSpawn(EntityLokoise.class, 1, 4, 4, EnumCreatureType.creature);
+		
+		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "Bug De Chunk - By Lokoise", "13")).setUnlocalizedName("record");
+	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "J'Aime Le Creep - By Lokoise", "blocks")).setUnlocalizedName("record");
+	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "Je Me Give - By Lokoise", "cat")).setUnlocalizedName("record");
+	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "J'Geek Un Max - By Lokoise", "chirp")).setUnlocalizedName("record");
+	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "J'Suis Sean Kevin - By Lokoise", "far")).setUnlocalizedName("record");
+	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "Tous Les Zombies - By Lokoise", "mall")).setUnlocalizedName("record");
+	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "Acta - By Lokoise", "mellohi")).setUnlocalizedName("record");
+	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "Le Journal D'Un Naufragay - By Lokoise", "stal")).setUnlocalizedName("record");
+	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "J'fait des pelles en diam's - By Lokoise", "strad")).setUnlocalizedName("record");
 	  	
-	  	spawnLokoise = (new BlockSpawnLokoise(spawnLokoiseID, Material.rock)).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("oreDiamond");
+	  	spawnLokoise = new BlockSpawnLokoise(spawnLokoiseID, Material.rock).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("lokoiseSpawn");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
 		proxy.registerRenderThings();
-	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-		EntityRegistry.registerModEntity(EntityLokoise.class, "Lokoise", 250, this, 20, 1, true);
-		EntityRegistry.addSpawn(EntityLokoise.class, 1, 4, 4, EnumCreatureType.creature);
 	}
 	
 	/** Apres initialisation du mod **/
