@@ -21,18 +21,15 @@ import net.minecraft.world.World;
 
 
 public class EntityLokoise extends EntityMob
-
 {
-    private static final ItemStack defaultHeldItem = new ItemStack (Item.diamond, 1) ;
-    private static final ItemStack defaultHeldItem2 = new ItemStack (Item.emerald, 1) ;
-    private static final ItemStack defaultHeldItem3 = new ItemStack (Item.swordDiamond, 1) ;
-	
+    public static ItemStack equippedItems[];
+    public static int equippedItem;
 	
     public EntityLokoise(World world)
 
     {
         super(world);
-        texture = "/thelokoisesmod/Lokoise.png";
+        texture = "/mods/TheLokoiseMod/Lokoise.png";
         moveSpeed = 0.25F;
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
@@ -44,13 +41,9 @@ public class EntityLokoise extends EntityMob
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
+        equippedItem = rand.nextInt(equippedItems.length);
     }
     
-    public void onLivingUpdate()
-    {
-        super.onLivingUpdate();
-    }
-           
     public int getMaxHealth()
     {
         return 20;
@@ -134,26 +127,9 @@ public class EntityLokoise extends EntityMob
     {
         return 1.5F;
     }
-    
-	int gHI = this.rand.nextInt(3);
-    public ItemStack getHeldItem() {
-    		
-
-    	if ((gHI == 0)) {
-    		
-    		return defaultHeldItem;
-    		
-    	} else if (gHI == 1){
-    		
-    		return defaultHeldItem2;
-    		
-    	} else if (gHI == 2) {
-    		
-    		return defaultHeldItem3;
-    		
-    	} else
-			
-		return null;
+    public ItemStack getHeldItem() 
+    {
+		return equippedItems[equippedItem];
     }
     /**
      * Returns the item ID for the item the mob drops on death.
@@ -189,4 +165,13 @@ public class EntityLokoise extends EntityMob
     protected void dropRareDrop(int par1){
         this.dropItem(Item.diamond.itemID, 1);
     }
+    
+    static {
+    	equippedItems = (new ItemStack[] {
+    			new ItemStack(Item.diamond, 1), 
+    			new ItemStack (Item.emerald, 1),
+    			new ItemStack (Item.swordDiamond, 1)
+    	});
+    }
+    
 }

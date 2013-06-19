@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class BlockSpawnLokoise extends Block{
 
-	protected BlockSpawnLokoise(int par1, int par2, Material par3Material) {
+	protected BlockSpawnLokoise(int par1, Material par3Material) {
 		super(par1, par3Material);
 	}
 

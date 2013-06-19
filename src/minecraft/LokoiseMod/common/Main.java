@@ -78,6 +78,7 @@ public class Main
 			CD_ActaID =  config.getItem("CD Acta ID", 5006).getInt();
 			CD_LeJournalDUnNaufragayID =  config.getItem("CD Le journal d'un Naufragay ID", 5007).getInt();
 			CD_JFaitDesPellesEnDiamsID =  config.getItem("CD J'fais des pelles en diams ID", 5008).getInt();
+			spawnLokoiseID = config.getBlock("Spawn Lokoise Block ID", 2500).getInt();
 		} 
 		finally 
 		{
@@ -92,23 +93,23 @@ public class Main
 	@Init
 	public void init(FMLInitializationEvent event)
 	{
-		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "", "Bug De Chunk - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "", "J'Aime Le Creep - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "", "Je Me Give - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "", "J'Geek Un Max - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "", "J'Suis Sean Kevin - By Lokoise")).setUnlocalizedName("record");
-	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "", "Tous Les Zombies - By Lokoise")).setUnlocalizedName("record");
-	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "", "Acta - By Lokoise")).setUnlocalizedName("record");
-	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "", "Le Journal D'Un Naufragay - By Lokoise")).setUnlocalizedName("record");
-	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "", "J'fait des pelles en diam's - By Lokoise")).setUnlocalizedName("record");
+		
+		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "1", "Bug De Chunk - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "2", "J'Aime Le Creep - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "3", "Je Me Give - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "4", "J'Geek Un Max - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "5", "J'Suis Sean Kevin - By Lokoise")).setUnlocalizedName("record");
+	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "6", "Tous Les Zombies - By Lokoise")).setUnlocalizedName("record");
+	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "7", "Acta - By Lokoise")).setUnlocalizedName("record");
+	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "8", "Le Journal D'Un Naufragay - By Lokoise")).setUnlocalizedName("record");
+	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "9", "J'fait des pelles en diam's - By Lokoise")).setUnlocalizedName("record");
 	  	
-	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-		EntityRegistry.registerModEntity(EntityLokoise.class, "Lokoise", 500, this, 20, 1, true);
-		EntityRegistry.addSpawn(EntityLokoise.class, 1, 4, 4, EnumCreatureType.creature);
-	  	
-	  	spawnLokoise =(new BlockSpawnLokoise(spawnLokoiseID, 50, Material.rock)).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("oreDiamond");
+	  	spawnLokoise = (new BlockSpawnLokoise(spawnLokoiseID, Material.rock)).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("oreDiamond");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
 		proxy.registerRenderThings();
+	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
+		EntityRegistry.registerModEntity(EntityLokoise.class, "Lokoise", 250, this, 20, 1, true);
+		EntityRegistry.addSpawn(EntityLokoise.class, 1, 4, 4, EnumCreatureType.creature);
 	}
 	
 	/** Apres initialisation du mod **/
@@ -116,6 +117,7 @@ public class Main
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		/** CRAFTINGS **/
+		
 	      GameRegistry.addRecipe(new ItemStack(CD_BugDeChunks, 1), new Object[]
 	      {"XYX", "Y Y", "XYX", 
 	    	  Character.valueOf('Y'), Item.ingotGold, 
@@ -170,6 +172,7 @@ public class Main
 	    
 	      /** NAMES **/
 		LanguageRegistry.addName(spawnLokoise, "Spawner de Lokoise en masse !");
+		LanguageRegistry.instance().addStringLocalization("entity.Lokoise.name", "Lokoise");
 		  
 	}
 	
