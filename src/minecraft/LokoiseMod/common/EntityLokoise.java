@@ -140,9 +140,9 @@ public class EntityLokoise extends EntityMob
             	return Main.CD_JeMeGive.itemID;
 		case 0:
 			    return Main.CD_JFaitDesPellesEnDiams.itemID;
-        }
-		return Block.dirt.blockID;
-          
+		default:
+				return Block.dirt.blockID;
+        }          
     }
     
     protected void dropRareDrop(int par1)
