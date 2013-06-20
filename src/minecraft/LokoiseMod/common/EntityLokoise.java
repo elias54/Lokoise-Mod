@@ -26,7 +26,7 @@ public class EntityLokoise extends EntityMob
         this.mobName = "Lokoise";
         this.texture = "/mods/TheLokoiseMod/Lokoise.png";
         this.moveSpeed = 5F;
-        this.moveForward = 1.5F;
+        this.moveStrafing = 5F;
         this.equippedItem = rand.nextInt(this.equippedItems.length);
         this.hurted = false;
     }
@@ -41,6 +41,7 @@ public class EntityLokoise extends EntityMob
     @Override
     public boolean attackEntityFrom(DamageSource sourceOfDamage, int i)
     {
+    	hurted = true;
     	if(hurted)
     	{
     		moveSpeed = 1F;
@@ -53,21 +54,34 @@ public class EntityLokoise extends EntityMob
     	this.moveEntity(d, d1, d2);
     }
     
+    public void smoke()
+    {
+    	for (int l = 0; l< 2; l++)
+    	{
+    		worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0.0000D, 0.1111D, 0.0D);
+    		worldObj.spawnParticle("explode", this.posX, this.posY, this.posZ, 0.0000D, 0.1111D, 0.0D);
+    		worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0.0000D, 0.1111D, 0.0D);
+    		worldObj.spawnParticle("explode", this.posX, this.posY, this.posZ, 0.0000D, 0.1111D, 0.0D);
+    		worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0.0000D, 0.1111D, 0.0D);
+    	}
+    }
+    
     @Override
     public void attackEntity(Entity entity, float f)
     {
     	this.fallDistance = -25F;
     	if(onGround)
     	{
-    		this.motionY += 0.5000048565252D;
+    		this.motionY += 0.40000008565252D;
+    		smoke();
     	}
     	if(handleWaterMovement())
     	{
-    		this.motionY += 0.5000048565252D;
+    		this.motionY += 0.40000008565252D;
     	}
     	super.attackEntity(entity, f);
     }
-    
+
     public int getMaxHealth()
     {
         return 30;
