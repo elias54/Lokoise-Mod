@@ -6,6 +6,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
@@ -21,6 +23,8 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
 @Mod(modid = Main.MODID, name = Main.MODNAME, version = Main.MODVERSION)
@@ -63,6 +67,17 @@ public class Main
 	   		   CD_LeJournalDUnNaufragayID,
 	   		   CD_JFaitDesPellesEnDiamsID,
 	   		   spawnLokoiseID;
+	static int ia = 9000;
+
+    public static Achievement BugDeChunks,
+    						  JAimeLeCreep,
+    						  JeMeGive,
+    						  JGeekUnMax,
+    						  JSuisSeanKevin,
+    						  TousLesZombies,
+    						  Acta,
+    						  LeJournalDUnNaufragay,
+    						  JFaitDesPellesEnDiams;
 
 	public Main()
 	{
@@ -115,9 +130,21 @@ public class Main
 	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "Acta - By Lokoise", "mellohi")).setUnlocalizedName("record");
 	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "Le Journal D'Un Naufragay - By Lokoise", "stal")).setUnlocalizedName("record");
 	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "J'fait des pelles en diam's - By Lokoise", "strad")).setUnlocalizedName("record");
-	  	
 	  	spawnLokoise = new BlockSpawnLokoise(spawnLokoiseID, Material.rock).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("lokoiseSpawn");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
+		GameRegistry.registerWorldGenerator(new BlockGeneration());
+		
+		BugDeChunks = new Achievement(ia++, "BugDeChunk", -10, 2, CD_BugDeChunks, null).registerAchievement();
+		JAimeLeCreep = new Achievement(ia++, "JAimeLeCreep", -11, 2, CD_JAimeLeCreep, null).registerAchievement();
+		JeMeGive = new Achievement(ia++, "JeMeGive", -12, 2, CD_JeMeGive, null).registerAchievement();
+		JGeekUnMax = new Achievement(ia++, "JGeekUnMax", -13, 4, CD_JGeekUnMax, null).registerAchievement();
+		JSuisSeanKevin = new Achievement(ia++, "JSuisSeanKevin", -10, 3, CD_JSuisSeanKevin, null).registerAchievement();
+		TousLesZombies = new Achievement(ia++, "TousLesZombies", -11, 3, CD_TousLesZombies, null).registerAchievement();
+		Acta = new Achievement(ia++, "Acta", -12, 3, CD_Acta, null).registerAchievement();
+		LeJournalDUnNaufragay = new Achievement(ia++, "Le Journal D'Un Naufragay", -13, 2, CD_LeJournalDUnNaufragay, null).registerAchievement();
+		JFaitDesPellesEnDiams = new Achievement(ia++, "J'fait des pelles en diam's", -13, 3, CD_JFaitDesPellesEnDiams, null).registerAchievement();
+		GameRegistry.registerCraftingHandler(new LokoiseModCraftingHandler());
+	  	GameRegistry.registerPickupHandler(new LokoiseModItemPickupHandler());
 		proxy.registerRenderThings();
 	}
 	
@@ -126,7 +153,6 @@ public class Main
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		/** CRAFTINGS **/
-		
 	      GameRegistry.addRecipe(new ItemStack(CD_BugDeChunks, 1), new Object[]
 	      {"XYX", "Y Y", "XYX", 
 	    	  Character.valueOf('Y'), Item.ingotGold, 
@@ -182,8 +208,10 @@ public class Main
 	      /** NAMES **/
 		LanguageRegistry.addName(spawnLokoise, "Spawner de Lokoise en masse !");
 		LanguageRegistry.instance().addStringLocalization("entity.Lokoise.name", "Lokoise");
-		  
+		proxy.registerAchievement();
 	}
+	
+
 	
 	
 }

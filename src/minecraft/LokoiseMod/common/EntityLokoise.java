@@ -17,13 +17,16 @@ public class EntityLokoise extends EntityMob
     public static ItemStack equippedItems[];
     public static int equippedItem;
 	public boolean hurted;
+	public static String mobName;
     
     public EntityLokoise(World world)
 
     {
         super(world);
+        this.mobName = "Lokoise";
         this.texture = "/mods/TheLokoiseMod/Lokoise.png";
-        this.moveSpeed = 0.25F;
+        this.moveSpeed = 5F;
+        this.moveForward = 1.5F;
         this.equippedItem = rand.nextInt(this.equippedItems.length);
         this.hurted = false;
     }
@@ -38,27 +41,6 @@ public class EntityLokoise extends EntityMob
     @Override
     public boolean attackEntityFrom(DamageSource sourceOfDamage, int i)
     {
-    	Minecraft mc = Minecraft.getMinecraft();
-    	hurted = true;
-    	Entity entity = sourceOfDamage.getEntity();
-    	EntityPlayer player = (EntityPlayer) entity;
-    	EntityPlayer playerStack = mc.thePlayer;
-    	ItemStack ITEMSTACK = playerStack.inventory.getCurrentItem();
-    	if(entity != null && ITEMSTACK != null)
-    	{
-	    	if(entity instanceof EntityPlayer)
-	    	{
-    			if(ITEMSTACK.itemID == Item.swordWood.itemID)
-    			{
-    				hurted = false;
-    				return false;
-    			}
-	    		if(player.capabilities.isCreativeMode)
-	    		{
-	    			i += 5;
-	    		}
-	    	}
-    	}
     	if(hurted)
     	{
     		moveSpeed = 1F;
@@ -77,11 +59,11 @@ public class EntityLokoise extends EntityMob
     	this.fallDistance = -25F;
     	if(onGround)
     	{
-    		this.motionY += 0.4000048565252D;
+    		this.motionY += 0.5000048565252D;
     	}
     	if(handleWaterMovement())
     	{
-    		this.motionY += 0.4000048565252D;
+    		this.motionY += 0.5000048565252D;
     	}
     	super.attackEntity(entity, f);
     }
