@@ -26,7 +26,6 @@ public class EntityLokoise extends EntityMob
         this.mobName = "Lokoise";
         this.texture = "/mods/TheLokoiseMod/Lokoise.png";
         this.moveSpeed = 5F;
-        this.moveStrafing = 5F;
         this.equippedItem = rand.nextInt(this.equippedItems.length);
         this.hurted = false;
     }
