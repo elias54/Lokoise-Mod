@@ -146,7 +146,6 @@ public class Main
 		GameRegistry.registerCraftingHandler(new LokoiseModCraftingHandler());
 	  	GameRegistry.registerPickupHandler(new LokoiseModItemPickupHandler());
 		proxy.registerRenderThings();
-		//testlol
 	}
 	
 	/** Apres initialisation du mod **/
