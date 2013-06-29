@@ -27,5 +27,7 @@ public class ClientProxy extends CommonProxy
 		ModLoader.addAchievementDesc(Main.Acta , "Acta", "Avoir un CD musical de \"Acta\"");
 		ModLoader.addAchievementDesc(Main.LeJournalDUnNaufragay , "Le Journal D'Un Naufragay", "Avoir un CD musical de \"Le Journal D'Un Naufragay\"");
 		ModLoader.addAchievementDesc(Main.JFaitDesPellesEnDiams , "J'fais des pelles en diam's", "Avoir un CD musical de \"J'fais des pelles en diam's\"");
+		ModLoader.addAchievementDesc(Main.UnBanquetPresqueParfait , "Un banquet presque parfait", "Avoir un CD musical de \"Un banquet presque parfait\"");
+		ModLoader.addAchievementDesc(Main.MusiqueBonusMinefight , "Musique Bonus Minefight", "Avoir un CD musical de \"Musique Bonus Minefight\"");
 	}
 }

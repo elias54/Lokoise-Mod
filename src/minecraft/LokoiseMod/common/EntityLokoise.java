@@ -119,7 +119,7 @@ public class EntityLokoise extends EntityMob
     protected int getDropItemId()
     {
         
-        switch (this.rand.nextInt(9))
+        switch (this.rand.nextInt(11))
         {
         case 1:
             	return Main.CD_TousLesZombies.itemID;
@@ -136,7 +136,11 @@ public class EntityLokoise extends EntityMob
 		case 7:
             	return Main.CD_Acta.itemID;
 		case 8:
-            	return Main.CD_JeMeGive.itemID;
+        		return Main.CD_JeMeGive.itemID;
+		case 9:
+        		return Main.CD_MusiqueBonusMinefight.itemID;
+		case 10:
+				return Main.CD_UnBanquetPresqueParfait.itemID;
 		case 0:
 			    return Main.CD_JFaitDesPellesEnDiams.itemID;
 		default:
