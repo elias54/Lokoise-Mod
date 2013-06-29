@@ -50,7 +50,7 @@ public class Main
 				  	   CD_JeMeGive,
 				  	   CD_JGeekUnMax,
 				  	   CD_JSuisSeanKevin,
-				  	   CD_TousLesZombies,
+				  	   CD_TousLesZombies, 
 				  	   CD_Acta,
 				  	   CD_LeJournalDUnNaufragay,
 				  	   CD_JFaitDesPellesEnDiams;
@@ -133,7 +133,7 @@ public class Main
 	  	spawnLokoise = new BlockSpawnLokoise(spawnLokoiseID, Material.rock).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("lokoiseSpawn");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
 		GameRegistry.registerWorldGenerator(new BlockGeneration());
-		
+		// Je sais ce que tu pourrai rajouter :) Les nouvelles musiques euh... ok mais elles sont sur son site/chaine youtube au moins ? Vi
 		BugDeChunks = new Achievement(ia++, "BugDeChunk", -10, 2, CD_BugDeChunks, null).registerAchievement();
 		JAimeLeCreep = new Achievement(ia++, "JAimeLeCreep", -11, 2, CD_JAimeLeCreep, null).registerAchievement();
 		JeMeGive = new Achievement(ia++, "JeMeGive", -12, 2, CD_JeMeGive, null).registerAchievement();
@@ -146,6 +146,7 @@ public class Main
 		GameRegistry.registerCraftingHandler(new LokoiseModCraftingHandler());
 	  	GameRegistry.registerPickupHandler(new LokoiseModItemPickupHandler());
 		proxy.registerRenderThings();
+		//testlol
 	}
 	
 	/** Apres initialisation du mod **/
