@@ -25,6 +25,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.*;
 
 
 @Mod(modid = Main.MODID, name = Main.MODNAME, version = Main.MODVERSION)
