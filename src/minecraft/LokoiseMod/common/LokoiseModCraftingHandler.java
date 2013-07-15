@@ -47,14 +47,6 @@ public class LokoiseModCraftingHandler implements ICraftingHandler{
         {
                 player.addStat(Main.JFaitDesPellesEnDiams , 1);
         }
-        if(itemID == Main.CD_UnBanquetPresqueParfait.itemID)
-        {
-                player.addStat(Main.UnBanquetPresqueParfait , 1);
-        }
-        if(itemID == Main.CD_MusiqueBonusMinefight.itemID)
-        {
-                player.addStat(Main.MusiqueBonusMinefight , 1);
-        }
 		
 	}
 
