@@ -38,7 +38,7 @@ public class RenderLokoise extends RenderBiped
     {
     	renderNamehereA((EntityLokoise)entity, d, d1, d2, f, f1);
     }
-    
+   
     protected void preRenderScale(EntityLokoise entity, float f)
     {
     	GL11.glScalef(1.0F, 1.0F, 1.0F);
