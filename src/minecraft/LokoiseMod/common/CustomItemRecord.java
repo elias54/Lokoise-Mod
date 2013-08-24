@@ -130,7 +130,7 @@ public class CustomItemRecord extends ItemRecord {
 		}
 		if(this.recordName == "thelokoisemod:UnDebitToutPourri")
 		{
-			return "Lokoise - Un débit tout pourri";
+			return "Lokoise - Un d\351bit tout pourri";
 		}
 		return this.recordName;
 	}
