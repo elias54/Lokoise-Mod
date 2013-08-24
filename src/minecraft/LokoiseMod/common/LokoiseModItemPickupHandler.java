@@ -56,6 +56,10 @@ public class LokoiseModItemPickupHandler implements IPickupNotifier
         {
                 player.addStat(Main.MusiqueBonusMinefight , 1);
         }
+        if(itemID == Main.CD_UnDebitToutPourri.itemID)
+        {
+        		player.addStat(Main.UnDebitToutPourri, 1);
+        }
 	}
 	
 }

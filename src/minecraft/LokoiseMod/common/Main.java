@@ -56,7 +56,8 @@ public class Main
 				  	   CD_LeJournalDUnNaufragay,
 				  	   CD_JFaitDesPellesEnDiams,
 				  	   CD_MusiqueBonusMinefight,
-				  	   CD_UnBanquetPresqueParfait;
+				  	   CD_UnBanquetPresqueParfait,
+				  	   CD_UnDebitToutPourri;
 	
 	public static Block spawnLokoise;
 	
@@ -71,6 +72,7 @@ public class Main
 	   		   CD_JFaitDesPellesEnDiamsID,
 	   		   CD_MusiqueBonusMinefightID,
 	   		   CD_UnBanquetPresqueParfaitID,
+	   		   CD_UnDebitToutPourriID,
 	   		   spawnLokoiseID;
 	static int ia = 9000;
 
@@ -84,7 +86,8 @@ public class Main
     						  LeJournalDUnNaufragay,
     						  JFaitDesPellesEnDiams,
     						  MusiqueBonusMinefight,
-    						  UnBanquetPresqueParfait;
+    						  UnBanquetPresqueParfait,
+    						  UnDebitToutPourri;
 
 	public Main()
 	{
@@ -111,6 +114,7 @@ public class Main
 			CD_JFaitDesPellesEnDiamsID =  config.getItem("CD J'fais des pelles en diams ID", 5008).getInt();
 			CD_UnBanquetPresqueParfaitID = config.getItem("CD Un banquet presque parfait", 5009).getInt();
 			CD_MusiqueBonusMinefightID = config.getItem("CD Musique Bonus Minefight", 5010).getInt();
+			CD_UnDebitToutPourriID = config.getItem("CD Un débit tout pourri", 5011).getInt();
 			spawnLokoiseID = config.getBlock("Spawn Lokoise Block ID", 2500).getInt();
 		} 
 		finally 
@@ -142,6 +146,7 @@ public class Main
 	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "thelokoisemod:J'faitDesPellesEnDiam's", "strad")).setUnlocalizedName("record");
 	  	CD_UnBanquetPresqueParfait = (new CustomItemRecord(CD_UnBanquetPresqueParfaitID, "thelokoisemod:UnBanquetPresqueParfait", "13")).setUnlocalizedName("record");
 	  	CD_MusiqueBonusMinefight = (new CustomItemRecord(CD_MusiqueBonusMinefightID, "thelokoisemod:MusiqueBonusMinefight", "blocks")).setUnlocalizedName("record");
+	  	CD_UnDebitToutPourri = (new CustomItemRecord(CD_UnDebitToutPourriID, "thelokoisemod:UnDebitToutPourri", "blocks")).setUnlocalizedName("record");
 	  	spawnLokoise = new BlockSpawnLokoise(spawnLokoiseID, Material.rock).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("lokoiseSpawn");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
 		GameRegistry.registerWorldGenerator(new BlockGeneration());
@@ -155,7 +160,8 @@ public class Main
 		LeJournalDUnNaufragay = new Achievement(ia++, "Le Journal D'Un Naufragay", -13, 2, CD_LeJournalDUnNaufragay, null).registerAchievement();
 		JFaitDesPellesEnDiams = new Achievement(ia++, "J'fait des pelles en diam's", -13, 3, CD_JFaitDesPellesEnDiams, null).registerAchievement();
 		UnBanquetPresqueParfait = new Achievement(ia++, "Un banquet presque parfait", -12, 4, CD_UnBanquetPresqueParfait, null).registerAchievement();
-		MusiqueBonusMinefight = new Achievement(ia++, "Musique Bonus Minefight", -12, 5, CD_MusiqueBonusMinefight, null).registerAchievement();
+		MusiqueBonusMinefight = new Achievement(ia++, "Musique Bonus Minefight", -11, 4, CD_MusiqueBonusMinefight, null).registerAchievement();
+		UnDebitToutPourri = new Achievement(ia++, "UnDebitToutPourri", -10 , 4, CD_UnDebitToutPourri, null).registerAchievement();
 		GameRegistry.registerCraftingHandler(new LokoiseModCraftingHandler());
 	  	GameRegistry.registerPickupHandler(new LokoiseModItemPickupHandler());
 		proxy.registerRenderThings();
@@ -224,6 +230,10 @@ public class Main
 	      
 	      GameRegistry.addRecipe(new ItemStack(CD_MusiqueBonusMinefight, 1), new Object[]
 	      {"XXX", "XXX", "XXX", 
+	    	  Character.valueOf('X'), (new ItemStack(Block.stone))});
+	      
+	      GameRegistry.addRecipe(new ItemStack(CD_UnDebitToutPourri, 1), new Object[]
+	      {"XXX", "XXX", "XXX",
 	    	  Character.valueOf('X'), (new ItemStack(Block.stone))});
 	    
 	      /** NAMES **/

@@ -55,6 +55,10 @@ public class LokoiseModCraftingHandler implements ICraftingHandler{
         {
                 player.addStat(Main.MusiqueBonusMinefight , 1);
         }
+        if(itemID == Main.CD_UnDebitToutPourri.itemID)
+        {
+                player.addStat(Main.UnDebitToutPourri , 1);
+        }
 		
 	}
 

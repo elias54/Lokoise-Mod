@@ -128,6 +128,10 @@ public class CustomItemRecord extends ItemRecord {
 		{
 			return "Lokoise - Minefight bonus";
 		}
+		if(this.recordName == "thelokoisemod:UnDebitToutPourri")
+		{
+			return "Lokoise - Un débit tout pourri";
+		}
 		return this.recordName;
 	}
 

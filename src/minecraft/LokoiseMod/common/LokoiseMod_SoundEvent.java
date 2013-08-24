@@ -35,6 +35,7 @@ public class LokoiseMod_SoundEvent
         	event.manager.soundPoolStreaming.addSound("thelokoisemod:TousLesZombies.ogg");
         	event.manager.soundPoolStreaming.addSound("thelokoisemod:UnBanquetPresqueParfait.ogg");
         	event.manager.soundPoolStreaming.addSound("thelokoisemod:MusiqueBonusMinefight.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:UnDebitToutPourri.ogg");
         }
         catch (Exception e)
         {
