@@ -49,7 +49,7 @@ public class CustomItemRecord extends ItemRecord {
 	 * clicking, he will have one of those. Return True if something happen and
 	 * false if it don't. This is for ITEMS, not BLOCKS
 	 */
-	public boolean onItemUse(ItemStack par1ItemStack,
+	public boolean onItemUse(ItemStack par1ItemStack, 
 			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
 			int par6, int par7, float par8, float par9, float par10) {
 		if (par3World.getBlockId(par4, par5, par6) == Block.jukebox.blockID
@@ -73,8 +73,8 @@ public class CustomItemRecord extends ItemRecord {
 	/**
 	 * allows items to add custom lines of information to the mouseover description
 	 */
-	public void addInformation(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) 
+	{
 		par3List.add(this.getRecordTitle());
 	}
 
@@ -82,8 +82,53 @@ public class CustomItemRecord extends ItemRecord {
 	/**
 	 * Return the title for this record.
 	 */
-	public String getRecordTitle() {
-		return "Lokoise - " + this.recordName;
+	public String getRecordTitle() 
+	{
+		if(this.recordName == "thelokoisemod:BugDeChunk")
+		{
+			return "Lokoise - Bug de chunk";
+		}
+		if(this.recordName == "thelokoisemod:J'AimeLeCreep")
+		{
+			return "Lokoise - J'aime le creep";
+		}
+		if(this.recordName == "thelokoisemod:JeMeGive")
+		{
+			return "Lokoise - Je me give";
+		}
+		if(this.recordName == "thelokoisemod:J'GeekUnMax")
+		{
+			return "Lokoise - J'geek un max";
+		}
+		if(this.recordName == "thelokoisemod:J'SuisSeanKevin")
+		{
+			return "Lokoise - J'suis Sean-Kevin";
+		}
+		if(this.recordName == "thelokoisemod:TousLesZombies")
+		{
+			return "Lokoise - Tout les zombies";
+		}
+		if(this.recordName == "thelokoisemod:Acta")
+		{
+			return "Lokoise - Acta";
+		}
+		if(this.recordName == "thelokoisemod:LeJournalD'UnNaufragay")
+		{
+			return "Lokoise - Le journal d'un Naufragay";
+		}
+		if(this.recordName == "thelokoisemod:J'faitDesPellesEnDiam's")
+		{
+			return "Lokoise - J'fais des pelles en diam's";
+		}
+		if(this.recordName == "thelokoisemod:UnBanquetPresqueParfait")
+		{
+			return "Lokoise - Un banquet presque parfait";
+		}
+		if(this.recordName == "thelokoisemod:MusiqueBonusMinefight")
+		{
+			return "Lokoise - Minefight bonus";
+		}
+		return this.recordName;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -103,7 +148,6 @@ public class CustomItemRecord extends ItemRecord {
 	}
 
 	@SideOnly(Side.CLIENT)
-	@Override
 	public void registerIcons(IconRegister iconRegister) {
 		itemIcon = iconRegister.registerIcon("record_" + recordTex);
 	}

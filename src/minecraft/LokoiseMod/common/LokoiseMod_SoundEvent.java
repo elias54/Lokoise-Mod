@@ -13,16 +13,28 @@ public class LokoiseMod_SoundEvent
     {
         try 
         {
-        	event.manager.soundPoolSounds.addSound("lokoisew1.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoisew1.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoisew2.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoisew2.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoisew3.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoisew3.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoisew4.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoisew4.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoisew5.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoisew5.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoisew6.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoisew6.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoised1.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoised1.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoised2.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoised2.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoiseh1.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoiseh1.ogg"));
-        	event.manager.soundPoolSounds.addSound("lokoiseh2.ogg", Main.class.getResource("/mods/TheLokoiseMod/sounds/lokoiseh2.ogg"));
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoisew1.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoisew2.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoisew3.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoisew4.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoisew5.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoisew6.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoised1.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoised2.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoiseh1.ogg");
+        	event.manager.soundPoolSounds.addSound("thelokoisemod:lokoiseh2.ogg");
+        	
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:Acta.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:BugDeChunk.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:J'AimeLeCreep.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:JeMeGive.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:J'faitDesPellesEnDiam's.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:J'GeekUnMax.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:J'SuisSeanKevin.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:LeJournalD'UnNaufragay.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:TousLesZombies.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:UnBanquetPresqueParfait.ogg");
+        	event.manager.soundPoolStreaming.addSound("thelokoisemod:MusiqueBonusMinefight.ogg");
         }
         catch (Exception e)
         {

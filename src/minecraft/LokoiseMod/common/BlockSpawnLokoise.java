@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,9 +31,9 @@ public class BlockSpawnLokoise extends Block{
 	    }
 	    @SideOnly(Side.CLIENT)
 	    
-	    public void registerIcons(IconRegister par1IconRegister)
+	    public Icon getIcon(int side, int metadata)
 	    {
-	        this.blockIcon = par1IconRegister.registerIcon("oreDiamond");
+	        return this.blockIcon = Block.oreDiamond.getBlockTextureFromSide(side);
 	    }
 	    
 	    

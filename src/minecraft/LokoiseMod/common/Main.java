@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.stats.Achievement;
@@ -32,7 +33,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Main 
 {
 	
-	public static final String MODID = "lokoisemod";
+	public static final String MODID = "thelokoisemod";
 	public static final String MODNAME = "Lokoise Mod";
 	public static final String MODVERSION = "v2";
 	
@@ -53,7 +54,9 @@ public class Main
 				  	   CD_TousLesZombies, 
 				  	   CD_Acta,
 				  	   CD_LeJournalDUnNaufragay,
-				  	   CD_JFaitDesPellesEnDiams;
+				  	   CD_JFaitDesPellesEnDiams,
+				  	   CD_MusiqueBonusMinefight,
+				  	   CD_UnBanquetPresqueParfait;
 	
 	public static Block spawnLokoise;
 	
@@ -66,6 +69,8 @@ public class Main
 	   		   CD_ActaID,
 	   		   CD_LeJournalDUnNaufragayID,
 	   		   CD_JFaitDesPellesEnDiamsID,
+	   		   CD_MusiqueBonusMinefightID,
+	   		   CD_UnBanquetPresqueParfaitID,
 	   		   spawnLokoiseID;
 	static int ia = 9000;
 
@@ -77,7 +82,9 @@ public class Main
     						  TousLesZombies,
     						  Acta,
     						  LeJournalDUnNaufragay,
-    						  JFaitDesPellesEnDiams;
+    						  JFaitDesPellesEnDiams,
+    						  MusiqueBonusMinefight,
+    						  UnBanquetPresqueParfait;
 
 	public Main()
 	{
@@ -85,13 +92,14 @@ public class Main
 	}
 	
 	/** Pre initialisation du mod **/
-	@PreInit
+	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new LokoiseMod_SoundEvent());
 		try 
 		{
+			config.load();
 			CD_BugDeChunksID = config.getItem("CD Bug de chunk ID", 5000).getInt();
 			CD_JAimeLeCreepID =  config.getItem("CD J'aime le creep ID", 5001).getInt();
 			CD_JeMeGiveID =  config.getItem("CD Je me give ID", 5002).getInt();
@@ -101,6 +109,8 @@ public class Main
 			CD_ActaID =  config.getItem("CD Acta ID", 5006).getInt();
 			CD_LeJournalDUnNaufragayID =  config.getItem("CD Le journal d'un Naufragay ID", 5007).getInt();
 			CD_JFaitDesPellesEnDiamsID =  config.getItem("CD J'fais des pelles en diams ID", 5008).getInt();
+			CD_UnBanquetPresqueParfaitID = config.getItem("CD Un banquet presque parfait", 5009).getInt();
+			CD_MusiqueBonusMinefightID = config.getItem("CD Musique Bonus Minefight", 5010).getInt();
 			spawnLokoiseID = config.getBlock("Spawn Lokoise Block ID", 2500).getInt();
 		} 
 		finally 
@@ -113,27 +123,28 @@ public class Main
 	}
 	
 	/** Initialisation du mod **/
-	@Init
+	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		
-	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", getFreeEggID, 24, 30);
+	  	EntityRegistry.registerGlobalEntityID(EntityLokoise.class, "Lokoise", getFreeEggID, 0xE6ED0E, 0x1B8600);
 		EntityRegistry.registerModEntity(EntityLokoise.class, "Lokoise", 250, this, 40, 1, true);
 		EntityRegistry.addSpawn(EntityLokoise.class, 1, 4, 4, EnumCreatureType.creature);
 		
-		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "Bug De Chunk - By Lokoise", "13")).setUnlocalizedName("record");
-	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "J'Aime Le Creep - By Lokoise", "blocks")).setUnlocalizedName("record");
-	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "Je Me Give - By Lokoise", "cat")).setUnlocalizedName("record");
-	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "J'Geek Un Max - By Lokoise", "chirp")).setUnlocalizedName("record");
-	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "J'Suis Sean Kevin - By Lokoise", "far")).setUnlocalizedName("record");
-	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "Tous Les Zombies - By Lokoise", "mall")).setUnlocalizedName("record");
-	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "Acta - By Lokoise", "mellohi")).setUnlocalizedName("record");
-	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "Le Journal D'Un Naufragay - By Lokoise", "stal")).setUnlocalizedName("record");
-	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "J'fait des pelles en diam's - By Lokoise", "strad")).setUnlocalizedName("record");
+		CD_BugDeChunks = (new CustomItemRecord(CD_BugDeChunksID, "thelokoisemod:BugDeChunk", "13")).setUnlocalizedName("record");
+	  	CD_JAimeLeCreep = (new CustomItemRecord(CD_JAimeLeCreepID, "thelokoisemod:J'AimeLeCreep", "blocks")).setUnlocalizedName("record");
+	  	CD_JeMeGive = (new CustomItemRecord(CD_JeMeGiveID, "thelokoisemod:JeMeGive", "cat")).setUnlocalizedName("record");
+	  	CD_JGeekUnMax = (new CustomItemRecord(CD_JGeekUnMaxID, "thelokoisemod:J'GeekUnMax", "chirp")).setUnlocalizedName("record");
+	  	CD_JSuisSeanKevin = (new CustomItemRecord(CD_JSuisSeanKevinID, "thelokoisemod:J'SuisSeanKevin", "far")).setUnlocalizedName("record");
+	  	CD_TousLesZombies = (new CustomItemRecord(CD_TousLesZombiesID, "thelokoisemod:TousLesZombies", "mall")).setUnlocalizedName("record");
+	  	CD_Acta = (new CustomItemRecord(CD_ActaID, "thelokoisemod:Acta", "mellohi")).setUnlocalizedName("record");
+	  	CD_LeJournalDUnNaufragay = (new CustomItemRecord(CD_LeJournalDUnNaufragayID, "thelokoisemod:LeJournalD'UnNaufragay", "stal")).setUnlocalizedName("record");
+	  	CD_JFaitDesPellesEnDiams = (new CustomItemRecord(CD_JFaitDesPellesEnDiamsID, "thelokoisemod:J'faitDesPellesEnDiam's", "strad")).setUnlocalizedName("record");
+	  	CD_UnBanquetPresqueParfait = (new CustomItemRecord(CD_UnBanquetPresqueParfaitID, "thelokoisemod:UnBanquetPresqueParfait", "13")).setUnlocalizedName("record");
+	  	CD_MusiqueBonusMinefight = (new CustomItemRecord(CD_MusiqueBonusMinefightID, "thelokoisemod:MusiqueBonusMinefight", "blocks")).setUnlocalizedName("record");
 	  	spawnLokoise = new BlockSpawnLokoise(spawnLokoiseID, Material.rock).setHardness(0.5F).setCreativeTab(CreativeTabs.tabMisc).setUnlocalizedName("lokoiseSpawn");
 		GameRegistry.registerBlock(spawnLokoise, "spawnLokoise");
 		GameRegistry.registerWorldGenerator(new BlockGeneration());
-		// Je sais ce que tu pourrai rajouter :) Les nouvelles musiques euh... ok mais elles sont sur son site/chaine youtube au moins ? Vi
 		BugDeChunks = new Achievement(ia++, "BugDeChunk", -10, 2, CD_BugDeChunks, null).registerAchievement();
 		JAimeLeCreep = new Achievement(ia++, "JAimeLeCreep", -11, 2, CD_JAimeLeCreep, null).registerAchievement();
 		JeMeGive = new Achievement(ia++, "JeMeGive", -12, 2, CD_JeMeGive, null).registerAchievement();
@@ -143,13 +154,15 @@ public class Main
 		Acta = new Achievement(ia++, "Acta", -12, 3, CD_Acta, null).registerAchievement();
 		LeJournalDUnNaufragay = new Achievement(ia++, "Le Journal D'Un Naufragay", -13, 2, CD_LeJournalDUnNaufragay, null).registerAchievement();
 		JFaitDesPellesEnDiams = new Achievement(ia++, "J'fait des pelles en diam's", -13, 3, CD_JFaitDesPellesEnDiams, null).registerAchievement();
+		UnBanquetPresqueParfait = new Achievement(ia++, "Un banquet presque parfait", -12, 4, CD_UnBanquetPresqueParfait, null).registerAchievement();
+		MusiqueBonusMinefight = new Achievement(ia++, "Musique Bonus Minefight", -12, 5, CD_MusiqueBonusMinefight, null).registerAchievement();
 		GameRegistry.registerCraftingHandler(new LokoiseModCraftingHandler());
 	  	GameRegistry.registerPickupHandler(new LokoiseModItemPickupHandler());
 		proxy.registerRenderThings();
 	}
 	
 	/** Apres initialisation du mod **/
-	@PostInit
+	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		/** CRAFTINGS **/
@@ -204,6 +217,14 @@ public class Main
 	      {"XYX", "Y Y", "XYX", 
 	    	  Character.valueOf('Y'), (new ItemStack(Item.dyePowder, 1, 15)), 
 	    	  Character.valueOf('X'), Item.flint});
+	      
+	      GameRegistry.addRecipe(new ItemStack(CD_UnBanquetPresqueParfait, 1), new Object[]
+	      {"XXX", "XXX", "XXX", 
+	    	  Character.valueOf('X'), (new ItemStack(Block.dirt))});
+	      
+	      GameRegistry.addRecipe(new ItemStack(CD_MusiqueBonusMinefight, 1), new Object[]
+	      {"XXX", "XXX", "XXX", 
+	    	  Character.valueOf('X'), (new ItemStack(Block.stone))});
 	    
 	      /** NAMES **/
 		LanguageRegistry.addName(spawnLokoise, "Spawner de Lokoise en masse !");
